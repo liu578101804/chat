@@ -1,0 +1,43 @@
+*{
+    padding: 0px;
+    margin: 0px;
+}
+.section{
+    margin-top: 20px;
+}
+.row{
+    margin: 0px 5%;
+    width: 90%;
+    min-height: 60px;
+}
+.row #content{
+    width: 100%;
+    border: 0px;
+    height: 200px;
+    background-color: #f3f3f3;
+    overflow-y: scroll;
+}
+.row span{
+    color: #888;
+}
+.row input{
+    width: 100%;
+    height: 30px;
+    font-size: 18px;
+    outline: none;
+    border-color: #e3e3e3;
+    border-width: 0px 0px 1px 0px;
+}
+.button-sub{
+    width: 90%;
+    margin: 5px 5%;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    background: #fbf1f2;
+}
+.button-sub:hover{
+    background: #ccc;
+    cursor: pointer;
+    user-select: none;
+}

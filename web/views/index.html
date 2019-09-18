@@ -1,0 +1,74 @@
+{{define "index.html"}}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>聊天室</title>
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+
+<div class="section">
+
+    <div class="row">
+        <span>内容</span>
+        <div id="content"></div>
+    </div>
+
+    <div class="row">
+        <span>host</span>
+        <input type="text" id="host" value="ws://localhost:8082/api/chat?id=1" />
+    </div>
+    <div class="row">
+        <span>message</span>
+        <input type="text" id="message" />
+    </div>
+    <div class="row">
+        <div class="button-sub" id="button-con">链接</div>
+        <div class="button-sub" id="button-sub">发送</div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    var socket = null;
+
+    var $message = $("#message");
+    var $host = $("#host");
+    var $content = $("#content");
+
+    $("#button-sub").click(function(){
+        inputMsg = $message.val();
+        socket.send(inputMsg);
+    })
+
+    $("#button-con").click(function(){
+        host = $host.val();
+        // Create WebSocket connection.
+        socket = new WebSocket(host);
+        // Connection opened
+        socket.addEventListener('open', function (event) {
+            socket.send('Hello Server!');
+        });
+        startListen();
+    })
+
+    function startListen(){
+        // Listen for messages
+        socket.addEventListener('message', function (event) {
+            console.log('Message from server ', event.data);
+            //添加内容
+            $content.append('<div>'+event.data+'</div>');
+            //滚动到底部
+            $content.scrollTop(($content)[0].scrollHeight);
+        });
+    }
+
+</script>
+
+</body>
+</html>
+
+
+{{end}}
